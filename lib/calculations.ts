@@ -21,7 +21,7 @@ export function parseAffectedLines(val: string | null | undefined): string[] {
 }
 
 /** Parse string boolean: "True" -> true */
-export function parseBool(val: string | boolean | null | undefined): boolean {
+export function parseBool(val: unknown): boolean {
   if (typeof val === 'boolean') return val;
   return String(val).toLowerCase() === 'true';
 }

@@ -5,10 +5,10 @@ const nextConfig = {
     serverActions: {
       bodySizeLimit: '2mb',
     },
-  },
-  outputFileTracingIncludes: {
-    '/api/chat': ['./hvac_construction_dataset/**/*.csv'],
-    '/api/reports': ['./hvac_construction_dataset/**/*.csv'],
+    outputFileTracingIncludes: {
+      '/api/chat': ['./hvac_construction_dataset/**/*.csv'],
+      '/api/reports': ['./hvac_construction_dataset/**/*.csv'],
+    },
   },
 }
 

@@ -8,7 +8,6 @@ export async function GET() {
   try {
     const data = getData();
 
-    // Build per-project summaries
     const projects = data.contracts.map((c) => {
       const projectLabor = data.laborLogs.filter((l) => l.project_id === c.project_id);
       const projectCOs = data.changeOrders.filter((co) => co.project_id === c.project_id);
@@ -24,10 +23,15 @@ export async function GET() {
       const approvedCOValue = approvedCOs.reduce((s, co) => s + (co.amount || 0), 0);
       const pendingCOValue = pendingCOs.reduce((s, co) => s + (co.amount || 0), 0);
 
-      const latestBill = projectBilling.sort((a, b) => b.application_number - a.application_number)[0];
+      const latestBill = [...projectBilling].sort(
+        (a, b) => b.application_number - a.application_number,
+      )[0];
       const cumulativeBilled = latestBill?.cumulative_billed || 0;
 
-      const scheduledValue = projectSOV.reduce((s, line) => s + (line.scheduled_value || 0), 0);
+      const scheduledValue = projectSOV.reduce(
+        (s, line) => s + (line.scheduled_value || 0),
+        0,
+      );
       const billedPct = round(safeDivide(cumulativeBilled, scheduledValue) * 100);
 
       return {
