@@ -1,6 +1,5 @@
 'use client';
 
-import type { ToolInvocation } from 'ai';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useState } from 'react';
@@ -15,6 +14,14 @@ import {
   Mail,
   Wrench,
 } from 'lucide-react';
+
+interface ToolInvocation {
+  toolCallId: string;
+  toolName: string;
+  args: Record<string, unknown>;
+  state: 'call' | 'result' | 'partial-call';
+  result?: Record<string, unknown>;
+}
 
 const TOOL_CONFIG: Record<string, { label: string; icon: React.ElementType; activeVerb: string }> = {
   scanPortfolio: {

@@ -1,11 +1,25 @@
 'use client';
 
-import type { Message } from 'ai';
 import { ToolInvocationCard } from '@/components/tool-invocation';
 import { User, Bot } from 'lucide-react';
 
+interface ToolInvocationItem {
+  toolCallId: string;
+  toolName: string;
+  args: Record<string, unknown>;
+  state: 'call' | 'result' | 'partial-call';
+  result?: Record<string, unknown>;
+}
+
+interface ChatMessage {
+  id: string;
+  role: 'user' | 'assistant' | 'system';
+  content: string;
+  toolInvocations?: ToolInvocationItem[];
+}
+
 interface MessageBubbleProps {
-  message: Message;
+  message: ChatMessage;
   isLoading: boolean;
 }
 
