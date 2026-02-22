@@ -1,0 +1,15 @@
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '2mb',
+    },
+  },
+  outputFileTracingIncludes: {
+    '/api/chat': ['./hvac_construction_dataset/**/*.csv'],
+    '/api/reports': ['./hvac_construction_dataset/**/*.csv'],
+  },
+}
+
+export default nextConfig
